@@ -5,9 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://git.oschina.net/3ss/genisys-config-repo.git
-          username: zhuchuangang20@qq.com
-          password: Songshu619
+          uri: https://github.com/zhuchuangang/spring-cloud-genisys-repo.git
 
 eureka:
   instance:
@@ -27,9 +25,7 @@ spring:
     config:
       server:
         git:
-          uri: https://git.oschina.net/3ss/genisys-config-repo.git
-          username: zhuchuangang20@qq.com
-          password: Songshu619
+          uri: https://github.com/zhuchuangang/spring-cloud-genisys-repo.git
 
 eureka:
   host1: discovery01
