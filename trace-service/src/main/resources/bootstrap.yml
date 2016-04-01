@@ -1,0 +1,61 @@
+info:
+  name: trace-service
+  version: ${project.version}
+
+endpoints:
+  bus:
+    enabled: true
+
+spring:
+  application:
+    name: trace-service
+  profiles:
+    active: ${maven_spring.profiles.active}
+  cloud:
+    config:
+      profile: ${maven_spring.profiles.active}
+      label: ${maven_cloud.config.label}
+      discovery:
+        enabled: true
+        service-id: config
+      username: szss
+      password: Songshu619
+
+encrypt:
+  failOnError: false
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n'
+
+zipkin:
+  store:
+    type: mysql
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@localhost:8761/eureka/
+
+---
+spring:
+  profiles: docker
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host1:discovery01}:${eureka.port:8761}/eureka/
+      replicasZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host2:discovery02}:${eureka.port:8761}/eureka/

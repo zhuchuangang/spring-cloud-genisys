@@ -1,0 +1,33 @@
+version: "2"
+services:
+  discovery01:
+    image: szss/discovery
+    ports:
+      - "8761:8761"
+    networks:
+      - microservice
+    environment:
+      - spring.profiles.active=discovery01
+
+  discovery02:
+    image: szss/discovery
+    ports:
+      - "8762:8761"
+    networks:
+      - microservice
+    environment:
+      - spring.profiles.active=discovery02
+
+  config:
+    image: szss/config
+    ports:
+      - "8888:8888"
+    networks:
+      - microservice
+    depends_on:
+      - discovery01
+      - discovery02
+
+networks:
+  microservice:
+    driver: overlay

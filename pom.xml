@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.szss.genisys</groupId>
+    <artifactId>genisys-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>genisys-parent</name>
+    <description>szss interface platform</description>
+
+    <modules>
+        <module>discovery</module>
+        <module>config</module>
+        <module>gateway</module>
+        <module>hystrix-dashboard</module>
+        <module>turbine</module>
+        <module>auth-service</module>
+        <module>settings-ui</module>
+        <module>commons-core</module>
+        <module>platform-service</module>
+        <module>commons-security</module>
+        <module>comall-service</module>
+        <module>trace-service</module>
+    </modules>
+
+    <!--<parent>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-parent</artifactId>-->
+        <!--<version>Brixton.M5</version>-->
+        <!--<relativePath/>-->
+    <!--</parent>-->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <docker.plugin.version>0.4.1</docker.plugin.version>
+        <docker.image.prefix>szss</docker.image.prefix>
+        <lombok.version>1.16.6</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>Brixton.M5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>adminlte</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>webjars-locator</artifactId>
+                <version>0.30</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven_spring.profiles.active>dev</maven_spring.profiles.active>
+                <maven_cloud.config.label>master</maven_cloud.config.label>
+            </properties>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <properties>
+                <maven_spring.profiles.active>docker</maven_spring.profiles.active>
+                <maven_cloud.config.label>master</maven_cloud.config.label>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <!--<repository>-->
+            <!--<id>jibiblio</id>-->
+            <!--<name>mirrors.ibiblio.org</name>-->
+            <!--<url>http://maven.ibiblio.org/maven2/</url>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
+        <repository>
+            <id>nexus</id>
+            <name>oschina</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>java.net-M2</id>
+            <name>java.net - Maven 2</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <name>Sonatype Repository</name>
+            <url>http://repository.sonatype.org/content/groups/forge/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>jboss.org</id>
+            <name>JBoss.org Repository</name>
+            <url>http://repository.jboss.org/nexus/content/repositories/releases/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+</project>

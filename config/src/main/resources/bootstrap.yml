@@ -1,0 +1,21 @@
+info:
+  name: config-service
+  version: ${project.version}
+
+spring:
+  profiles:
+    active: ${maven_spring.profiles.active}
+  application:
+    name: config
+
+server:
+  port: 8888
+
+security:
+  user:
+    name: szss
+    password: Songshu619
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n'

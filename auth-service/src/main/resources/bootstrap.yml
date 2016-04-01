@@ -1,0 +1,83 @@
+info:
+  name: auth-service
+  version: ${project.version}
+
+endpoints:
+  bus:
+    enabled: true
+
+server:
+  context-path: /uaa
+
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: ${maven_spring.profiles.active}
+  cloud:
+    config:
+      profile: ${maven_spring.profiles.active}
+      label: ${maven_cloud.config.label}
+      discovery:
+        enabled: true
+        service-id: config
+      username: szss
+      password: Songshu619
+  freemarker:
+    expose-request-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    cache: false
+    settings:
+      auto_import: /spring.ftl as spring
+  resources:
+    chain:
+      enabled: true
+  data:
+    rest:
+      base-path: /api
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+
+encrypt:
+  failOnError: false
+
+security:
+  sessions: if-required
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n'
+
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@localhost:8761/eureka/
+
+---
+spring:
+  profiles: docker
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host1:discovery01}:${eureka.port:8761}/eureka/
+      replicasZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host2:discovery02}:${eureka.port:8761}/eureka/
+

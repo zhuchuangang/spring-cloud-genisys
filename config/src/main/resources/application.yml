@@ -1,0 +1,48 @@
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git.oschina.net/3ss/genisys-config-repo.git
+          username: zhuchuangang20@qq.com
+          password: Songshu619
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@localhost:8761/eureka/
+
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git.oschina.net/3ss/genisys-config-repo.git
+          username: zhuchuangang20@qq.com
+          password: Songshu619
+
+eureka:
+  host1: discovery01
+  host2: discovery02
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host1:discovery}:${eureka.port:8761}/eureka/
+      replicasZone: http://${eureka.username:szss}:${eureka.password:Songshu619}@${eureka.host2:discovery}:${eureka.port:8761}/eureka/
+
+

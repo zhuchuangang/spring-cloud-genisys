@@ -1,0 +1,21 @@
+info:
+  name: discovery-service
+  version:  ${project.version}
+
+server:
+  port: 8761
+
+spring:
+  profiles:
+    active: ${maven_spring.profiles.active}
+  application:
+    name: discovery
+
+security:
+  user:
+    name: ${eureka.username:szss}
+    password: ${eureka.password:Songshu619}
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n'
