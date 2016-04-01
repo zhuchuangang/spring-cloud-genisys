@@ -1,11 +1,13 @@
 ---
 spring:
-  profiles: dev
+  profiles: native
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/zhuchuangang/spring-cloud-genisys-repo.git
+        native:
+          search-locations: classpath:/config
+#        git:
+#          uri: https://github.com/zhuchuangang/spring-cloud-genisys-repo.git
 
 eureka:
   instance:

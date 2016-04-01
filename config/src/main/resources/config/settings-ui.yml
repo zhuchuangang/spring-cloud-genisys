@@ -1,0 +1,69 @@
+---
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud: DEBUG
+    org.springframework.web: WARN
+
+spring:
+  profiles: dev
+  aop:
+    proxy-target-class: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/uaa
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: admin
+    password: 123456
+
+ribbon:
+  eureka:
+   enabled: true
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:7777/uaa/oauth/token
+      userAuthorizationUri: http://localhost:7777/uaa/oauth/authorize
+      clientId: service-integration
+      clientSecret: client_secret
+      authorized-grant-types: client_credentials
+    resource:
+      userInfoUri: http://localhost:7777/uaa/user
+      preferTokenInfo: false
+  sessions: STATELESS
+---
+spring:
+  profiles: docker
+  aop:
+    proxy-target-class: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/uaa
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  rabbitmq:
+    addresses: rabbitmq1:5672,rabbitmq2:5672,rabbitmq3:5672
+    username: admin
+    password: 123456
+
+ribbon:
+  eureka:
+   enabled: true
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://auth-service:7777/uaa/oauth/token
+      userAuthorizationUri: http://auth-service:7777/uaa/oauth/authorize
+      clientId: service-integration
+      clientSecret: client_secret
+      authorized-grant-types: client_credentials
+    resource:
+      userInfoUri: http://auth-service:7777/uaa/user
+      preferTokenInfo: false
+  sessions: STATELESS

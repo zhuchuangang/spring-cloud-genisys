@@ -4,7 +4,8 @@ info:
 
 spring:
   profiles:
-    active: ${maven_spring.profiles.active}
+#    active: ${maven_spring.profiles.active}
+    active: native
   application:
     name: config
 

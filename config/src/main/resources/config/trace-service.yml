@@ -1,0 +1,40 @@
+---
+server:
+  port: 9411
+
+spring:
+  profiles: dev
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: admin
+    password: 123456
+  datasource:
+    url: jdbc:mysql://localhost:3306/zipkin?characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+security:
+  basic:
+    enabled: false
+---
+server:
+  port: 9411
+
+spring:
+  profiles: docker
+  rabbitmq:
+    host: rabbitmq1:5672,rabbitmq2:5672,rabbitmq3:5672
+    port: 5672
+    username: admin
+    password: 123456
+  datasource:
+    url: jdbc:mysql://mysql:3306/zipkin?characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+security:
+  basic:
+    enabled: false

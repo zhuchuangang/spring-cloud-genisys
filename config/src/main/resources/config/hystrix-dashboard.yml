@@ -1,0 +1,12 @@
+---
+server:
+ port: 7979
+
+spring:
+ profiles: dev
+---
+server:
+ port: 7979
+
+spring:
+ profiles: docker

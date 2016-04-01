@@ -1,0 +1,29 @@
+---
+server:
+  port: 10000
+
+spring:
+ profiles: dev
+
+security:
+  basic:
+    enabled: false
+
+turbine:
+  clusterNameExpression: new String("default")
+  appConfig: gateway
+
+---
+server:
+  port: 10000
+
+spring:
+ profiles: docker
+
+security:
+  basic:
+    enabled: false
+
+turbine:
+  clusterNameExpression: new String("default")
+  appConfig: gateway
