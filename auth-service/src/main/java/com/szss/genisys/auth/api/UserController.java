@@ -34,4 +34,12 @@ public class UserController  {
                               @RequestParam("size") int size){
         return userService.findAll(name,username,page,size);
     }
+
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    public void add(@RequestParam("username") String username,
+                    @RequestParam("name") String name,
+                    @RequestParam("phone") String phone,
+                    @RequestParam("enabled") Boolean enabled){
+        userService.add(username ,name, phone, enabled);
+    }
 }

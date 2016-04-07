@@ -116,13 +116,14 @@
                 </div>
             </form>
             <!-- /.search form -->
-            <#--主菜单-->
+        <#--主菜单-->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">内容导航</li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i
+                            class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="${base}/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
@@ -173,39 +174,57 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
-                            <div class="box-body">
-                                <div class="form-group">
-                                <div class="col-lg-3 col-sm-3">
-                                    <label class="col-lg-4 col-sm-4 control-label" for="username">用户名</label>
-                                    <div class="col-lg-8 col-sm-8 input-group">
-                                        <input name="username" type="text" placeholder="请输入用户名"
-                                               class="input-sm form-control"/>
+                        <form id="create-user" method="post" role="form"
+                              action="../settings/users?method=settings.users.create">
+                            <fieldset>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <div class="col-lg-3 col-sm-3">
+                                            <label class="col-lg-4 col-sm-4 control-label" for="username">用户名</label>
+                                            <div class="col-lg-8 col-sm-8 input-group">
+                                                <input name="username" type="text" placeholder="请输入用户名"
+                                                       class="input-sm form-control"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <#--<div class="form-group col-sm-4 col-md-4 col-lg-4">-->
-                                    <#--<label class="col-sm-1 col-md-1 col-lg-1" for="name">姓名</label>-->
-                                    <#--<input class="form-control" name="name" type="text" class="form-control" placeholder="请输入姓名">-->
-                                <#--</div>-->
-                                <#--<div class="form-group">-->
-                                    <#--<label class="col-sm-1 col-md-1 col-lg-1" for="username">用户名</label>-->
-                                    <#--<input class="col-sm-4 col-md-4 col-lg-4 form-control" name="username" type="text" class="form-control" placeholder="请输入姓名">-->
-                                <#--</div>-->
-                                <#--<div class="form-group">-->
-                                    <#--<label class="col-sm-1 col-md-1 col-lg-1" for="password">密码</label>-->
-                                    <#--<input class="col-sm-4 col-md-4 col-lg-4 form-control" name="password" type="password" class="form-control" placeholder="请输入姓名">-->
-                                <#--</div>-->
-                                <#--<div class="form-group">-->
-                                    <#--<label class="col-sm-1 col-md-1 col-lg-1" for="phone">电话</label>-->
-                                    <#--<input class="col-sm-4 col-md-4 col-lg-4 form-control" name="phone" type="text" class="form-control" placeholder="请输入姓名">-->
-                                <#--</div>-->
+                                <div class="box-body">
+                                    <div class="col-lg-3 col-sm-3">
+                                        <label class="col-lg-4 col-sm-4 control-label" for="name">姓名</label>
+                                        <div class="col-lg-8 col-sm-8 input-group">
+                                            <input name="name" type="text" placeholder="请输入姓名"
+                                                   class="input-sm form-control"/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- /.box-body -->
+                                <div class="box-body">
+                                    <div class="col-lg-3 col-sm-3">
+                                        <label class="col-lg-4 col-sm-4 control-label" for="enabled">是否可用</label>
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                                        <div class="col-lg-8 col-sm-8 input-group">
+                                            <select name="enabled" placeholder="请输入是否可用" class="input-sm form-control"/>
+                                            class="input-sm form-control"/>
+                                            <option value="true">可用</option>
+                                            <option value="false">不可用</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="col-lg-3 col-sm-3">
+                                        <label class="col-lg-4 col-sm-4 control-label" for="phone">电话</label>
+                                        <div class="col-lg-8 col-sm-8 input-group">
+                                            <input name="phone" type="text" placeholder="请输入电话"
+                                                   class="input-sm form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <button type="reset" class="btn btn-primary">重置</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                     <!-- /.box -->
@@ -218,7 +237,6 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -234,7 +252,7 @@
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
 
-            <#--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
+        <#--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -271,12 +289,17 @@
 <!-- page script -->
 <script type="text/javascript">
     // To make Pace works on Ajax calls
-    $(document).ajaxStart(function() { Pace.restart(); });
-
-    $(function () {
-
-
+    $(document).ajaxStart(function () {
+        Pace.restart();
     });
+
+    //    $(function () {
+    //        $('#create-user').validate({
+    //
+    //        });
+    //
+    //
+    //    });
 </script>
 </body>
 </html>

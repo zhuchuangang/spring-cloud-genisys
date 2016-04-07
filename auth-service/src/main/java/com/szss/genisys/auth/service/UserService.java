@@ -61,4 +61,11 @@ public class UserService implements UserDetailsService{
                 return null;
             },pageRequest);
     }
+
+    public void add(String username,String name,String phone,Boolean enabled){
+        User user = new User();
+        user.setName(name);
+        user.setUsername(username);
+        userRepository.save(user);
+    }
 }

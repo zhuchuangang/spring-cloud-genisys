@@ -38,4 +38,9 @@ public class UserClient {
 		return null;
     }
 
+    public JsonPage<User> add(String username,String name,String phone,Boolean enabled){
+        ParameterizedTypeReference responseType=new ParameterizedTypeReference<JsonPage<User>>(){};
+        ResponseEntity<JsonPage<User>> responseEntity = restTemplate.exchange(String.format("http://auth-service/uaa/api/users/add?username=%s&name=%s&phone=%s&enabled=%s&",username,name,phone,enabled),HttpMethod.GET,null,responseType);
+        return responseEntity.getBody();
+    }
 }
