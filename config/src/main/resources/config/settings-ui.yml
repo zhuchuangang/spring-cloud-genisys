@@ -35,7 +35,7 @@ security:
     resource:
       userInfoUri: http://localhost:7777/uaa/user
       preferTokenInfo: false
-  sessions: STATELESS
+  sessions: if-required
 ---
 spring:
   profiles: docker
@@ -66,4 +66,4 @@ security:
     resource:
       userInfoUri: http://auth-service:7777/uaa/user
       preferTokenInfo: false
-  sessions: STATELESS
+  sessions: if-required

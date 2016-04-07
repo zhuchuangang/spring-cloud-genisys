@@ -40,6 +40,8 @@ encrypt:
   failOnError: false
 
 security:
+  sessions:
+  enable-csrf: true
   basic:
     enabled: false
 

@@ -8,7 +8,7 @@
     <meta name="description" content="Genisys 单点登录">
     <meta name="author" content="鼠笑天">
     <meta name="keyword" content="Genisys 单点登录">
-    <#--CSRF TOKEN-->
+    <!--CSRF TOKEN-->
     <meta name="_csrf" content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
