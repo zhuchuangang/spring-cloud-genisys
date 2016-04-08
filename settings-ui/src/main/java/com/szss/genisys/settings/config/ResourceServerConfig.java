@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -50,10 +51,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/webjars/**").permitAll()
-				.antMatchers("/**").access("#oauth2.isOAuth()")
-                .and().csrf()
-                .csrfTokenRepository(csrfTokenRepository()).and()
-                .addFilterAfter(csrfHeaderFilter(), SessionManagementFilter.class);
+				.antMatchers("/**").access("#oauth2.isOAuth()");
+//                .and().csrf()
+//                .csrfTokenRepository(csrfTokenRepository()).and()
+//                .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 	}
 
 	@Override
@@ -64,33 +65,33 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	}
 
 
-    private Filter csrfHeaderFilter() {
-        return new OncePerRequestFilter() {
-            @Override
-            protected void doFilterInternal(HttpServletRequest request,
-                                            HttpServletResponse response, FilterChain filterChain)
-                    throws ServletException, IOException {
-                CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
-                        .getName());
-                if (csrf != null) {
-                    Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
-                    String token = csrf.getToken();
-                    if (cookie == null || token != null
-                            && !token.equals(cookie.getValue())) {
-                        cookie = new Cookie("XSRF-TOKEN", token);
-                        cookie.setPath("/");
-                        response.addCookie(cookie);
-                    }
-                }
-                filterChain.doFilter(request, response);
-            }
-        };
-    }
-
-    private CsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName("X-XSRF-TOKEN");
-        return repository;
-    }
+//    private Filter csrfHeaderFilter() {
+//        return new OncePerRequestFilter() {
+//            @Override
+//            protected void doFilterInternal(HttpServletRequest request,
+//                                            HttpServletResponse response, FilterChain filterChain)
+//                    throws ServletException, IOException {
+//                CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
+//                        .getName());
+//                if (csrf != null) {
+//                    Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
+//                    String token = csrf.getToken();
+//                    if (cookie == null || token != null
+//                            && !token.equals(cookie.getValue())) {
+//                        cookie = new Cookie("XSRF-TOKEN", token);
+//                        cookie.setPath("/");
+//                        response.addCookie(cookie);
+//                    }
+//                }
+//                filterChain.doFilter(request, response);
+//            }
+//        };
+//    }
+//
+//    private CsrfTokenRepository csrfTokenRepository() {
+//        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+//        repository.setHeaderName("X-XSRF-TOKEN");
+//        return repository;
+//    }
 
 }

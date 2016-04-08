@@ -5,10 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminSettings</title>
-    <!--CSRF TOKEN-->
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -229,7 +225,7 @@
                                     <button type="reset" class="btn btn-primary">重置</button>
                                 </div>
                             </fieldset>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="_csrf"/>
                         </form>
                     </div>
                     <!-- /.box -->
@@ -291,6 +287,9 @@
 <script src="${base}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/dist/js/demo.js"></script>
+<#--JQuery Cookie-->
+<script src="../webjars/jquery-cookie/1.4.1-1/jquery.cookie.js"></script>
+
 <!-- page script -->
 <script type="text/javascript">
     // To make Pace works on Ajax calls
@@ -298,13 +297,10 @@
         Pace.restart();
     });
 
-    //    $(function () {
-    //        $('#create-user').validate({
-    //
-    //        });
-    //
-    //
-    //    });
+    $(function () {
+        $(":hidden[name='_csrf']").val($.cookie("XSRF-TOKEN"));
+        //$('#create-user').validate({});
+    });
 </script>
 </body>
 </html>

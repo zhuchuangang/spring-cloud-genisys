@@ -5,12 +5,10 @@ import com.szss.commons.web.plugins.datatables.DataTableCriterias;
 import com.szss.commons.web.plugins.datatables.DataTablePage;
 import com.szss.genisys.settings.client.auth.UserClient;
 import com.szss.genisys.settings.dto.User;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,9 +44,12 @@ public class UsersController {
         return dataTablePage;
     }
 
-    @RequestMapping(value="/users", method =RequestMethod.POST, params = "method=settings.users.create")
+    @RequestMapping(value="/users", method =RequestMethod.POST,params = "method=settings.users.create")
 //    @PreAuthorize("hasPermission('','settings.user.add')")
-    public String addUser(@RequestParam(value = "username") String username){
+    public String addUser(@RequestParam(value = "username") String username,
+                          @RequestParam(value = "name") String name,
+                          @RequestParam(value = "phone") String phone,
+                          @RequestParam(value = "enabled") Boolean enabled){
         System.out.println(username);
 //        if (bindingResult.hasErrors()) {
 //            return "/setting/create_user";
@@ -56,6 +57,6 @@ public class UsersController {
 //        JsonPage<User> response = userClient.add(user.getUsername(),user.getName(),user.getPhone(), user.getEnabled());
 //        DataTablePage<User> db = new DataTablePage<User>(response);
 //        db.setDraw(criterias.getDraw());
-        return "/setting/user";
+        return "/setting/users";
     }
 }
